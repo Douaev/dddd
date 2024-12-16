@@ -1,0 +1,167 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Carte Interactive</title>
+    <link rel="stylesheet" href="https://unpkg.com/leaflet@1.7.1/dist/leaflet.css">
+    <link rel="stylesheet" href="https://unpkg.com/leaflet-control-geocoder/dist/Control.Geocoder.css">
+    <style>
+        body {
+            font-family: "Times New Roman", serif;
+            margin: 0;
+            padding: 0;
+            background-color: #f0f8ff;
+        }
+
+        header {
+            background-color: #6A0DAD;
+            color: white;
+            padding: 20px;
+            text-align: center;
+            box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+        }
+
+        header h1 {
+            margin: 0;
+            font-size: 24px;
+        }
+
+        #map-container {
+            display: flex;
+            height: calc(100vh - 70px);
+        }
+
+        #sidebar {
+            width: 300px;
+            padding: 15px;
+            background-color: #e6f7ff;
+            overflow-y: auto;
+            box-shadow: 2px 0 5px rgba(0, 0, 0, 0.1);
+        }
+
+        #map {
+            flex-grow: 1;
+            height: 100%;
+        }
+
+        #message {
+            margin-top: 15px;
+            padding: 10px;
+            background-color: #f9f3b4;
+            color: #7a6603;
+            border: 1px solid #e6db91;
+            border-radius: 5px;
+            font-size: 14px;
+        }
+
+        label {
+            display: block;
+            margin-bottom: 10px;
+        }
+
+        button {
+            display: block;
+            margin: 10px 0;
+            padding: 10px;
+            background-color: #6A0DAD;
+            color: white;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+            font-size: 14px;
+        }
+
+        button:hover {
+            background-color: #5e0ca6;
+        }
+
+        .leaflet-control-geocoder {
+            margin: 10px;
+            border-radius: 5px;
+            box-shadow: 0 2px 4px rgba(0, 0, 0, 0.2);
+        }
+    </style>
+</head>
+<body>
+    <header>
+        <h1>Visualisation Du COG</h1>
+    </header>
+
+    <div id="map-container">
+        <div id="sidebar">
+            <h2>Options</h2>
+            <label>
+                <input type="checkbox" id="toggle-osm" checked>
+                OpenStreetMap
+            </label>
+            <label>
+                <input type="checkbox" id="toggle-cog">
+                Cloud Optimized GeoTIFF
+            </label>
+            <div id="message">
+                Veuillez cocher l'option "Cloud Optimized GeoTIFF" pour afficher le COG.
+            </div>
+            <hr>
+            <h3>Zoom sur des régions :</h3>
+            <button id="zoom-al-haouz">Zoom Al Haouz</button>
+            <button id="zoom-marrakech">Zoom Marrakech</button>
+        </div>
+        <div id="map"></div>
+    </div>
+
+    <script src="https://unpkg.com/leaflet@1.7.1/dist/leaflet.js"></script>
+    <script src="https://unpkg.com/leaflet-control-geocoder/dist/Control.Geocoder.js"></script>
+    <script src="https://unpkg.com/proj4"></script>
+    <script src="https://unpkg.com/georaster"></script>
+    <script src="https://unpkg.com/georaster-layer-for-leaflet"></script>
+    <script>
+        const map = L.map("map").setView([31.5085, -7.9957], 10);
+
+        const osmLayer = L.tileLayer("https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png", {
+            attribution: "© OpenStreetMap contributors",
+        }).addTo(map);
+
+        const satelliteLayer = L.tileLayer("https://{s}.tile.openstreetmap.fr/hot/{z}/{x}/{y}.png", {
+            attribution: "© OpenStreetMap contributors, Tiles courtesy of HOT",
+        });
+
+        L.control.scale().addTo(map);
+
+        const urlToCog = "https://cog-storage.s3.eu-north-1.amazonaws.com/output_cog.tif";
+        let cogLayer;
+
+        parseGeoraster(urlToCog).then((georaster) => {
+            cogLayer = new GeoRasterLayer({
+                georaster: georaster,
+                resolution: 256,
+            });
+        });
+
+        document.getElementById("toggle-osm").addEventListener("change", (e) => {
+            if (e.target.checked) {
+                map.addLayer(osmLayer);
+            } else {
+                map.removeLayer(osmLayer);
+            }
+        });
+
+        document.getElementById("toggle-cog").addEventListener("change", (e) => {
+            if (e.target.checked && cogLayer) {
+                map.addLayer(cogLayer);
+                map.fitBounds(cogLayer.getBounds());
+            } else if (cogLayer) {
+                map.removeLayer(cogLayer);
+            }
+        });
+
+        document.getElementById("zoom-al-haouz").addEventListener("click", () => {
+            map.setView([31.5085, -7.9957], 12);
+        });
+
+        document.getElementById("zoom-marrakech").addEventListener("click", () => {
+            map.setView([31.63, -8.0], 12);
+        });
+    </script>
+</body>
+</html>

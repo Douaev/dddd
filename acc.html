@@ -1,0 +1,164 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Accueil - Formats COG, Zarr et GeoParquet</title>
+    <style>
+        body {
+            font-family: 'Times New Roman', serif;
+            margin: 0;
+            padding: 0;
+            background-color: #f7f7f7;
+            color: #4f4f4f;
+        }
+
+        
+        nav {
+            background-color: #6A0DAD; 
+            padding: 20px;
+            color: white;
+            text-align: center;
+            box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+        }
+
+        nav h1 {
+            margin: 0;
+            font-size: 24px;
+            font-weight: bold;
+            letter-spacing: 1px;
+        }
+
+        .full-width-section {
+            width: 100%;
+            height: 100vh;
+            background: linear-gradient(135deg, rgba(255, 255, 255, 0.8) 25%, rgba(204, 204, 255, 0.7) 50%, rgba(255, 255, 255, 0.9) 75%);
+            text-align: center;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+        }
+
+        .full-width-section h2 {
+            font-size: 30px;
+            color: #6A0DAD;
+            margin-bottom: 15px;
+            font-weight: bold;
+        }
+
+        .full-width-section p {
+            font-size: 16px;
+            color: #4f4f4f;
+            line-height: 1.6;
+            max-width: 800px;
+            text-align: justify;
+            margin: 0 auto;
+            background: rgba(255, 255, 255, 0.8);
+            padding: 15px;
+            border-radius: 8px;
+            box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+        }
+
+        .btn {
+            background-color: #6A0DAD;
+            color: white;
+            padding: 12px 20px;
+            font-size: 16px;
+            text-transform: uppercase;
+            text-decoration: none;
+            border-radius: 5px;
+            cursor: pointer;
+            display: inline-block;
+            transition: background-color 0.3s;
+        }
+
+        .btn:hover {
+            background-color: #4f1c9d;
+        }
+
+        /* Section des informations */
+        .information-section {
+            padding: 40px 20px;
+            max-width: 1200px;
+            margin: 0 auto;
+        }
+
+        .information-section h2 {
+            color: #6A0DAD;
+            font-size: 24px;
+            text-align: center;
+            margin-bottom: 30px;
+        }
+
+        .information-section p {
+            font-size: 16px;
+            line-height: 1.8;
+            text-align: justify;
+            margin-bottom: 20px;
+        }
+
+        .cloud-effect {
+            background: linear-gradient(135deg, rgba(255, 255, 255, 0.6) 25%, rgba(204, 204, 255, 0.5) 50%, rgba(255, 255, 255, 0.6) 75%);
+            padding: 20px;
+            border-radius: 10px;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+            margin-top: 20px;
+        }
+
+    </style>
+</head>
+<body>
+
+
+<nav>
+    <h1>Accueil - Formats COG, Zarr et GeoParquet</h1>
+</nav>
+
+
+<section class="full-width-section">
+    <h2>Bienvenue sur la plateforme dédiée aux formats géospatiaux modernes</h2>
+    <p>Explorez les formats Cloud Optimized GeoTIFF (COG), Zarr et GeoParquet pour une gestion et une visualisation efficaces des données géospatiales. Cette plateforme met en avant leurs caractéristiques et leurs applications dans des contextes tels que le suivi environnemental et l'analyse spatiale.</p>
+    <a href="#about" class="btn">Savoir plus</a>
+</section>
+
+
+<div id="about" class="information-section">
+    <h2>Cloud Optimized GeoTIFF (COG)</h2>
+    <p class="cloud-effect">Le COG est un format d'imagerie conçu pour le cloud, permettant d'accéder efficacement aux parties nécessaires d'un fichier sans le télécharger en entier. Il est idéal pour les données d'imagerie satellite et les analyses à grande échelle.</p>
+    <p class="cloud-effect">Il permet une diffusion en streaming des données géospatiales, réduisant la duplication et optimisant les performances dans des environnements cloud. Les fichiers COG conservent leur compatibilité avec les outils SIG traditionnels tout en offrant des avantages modernes.</p>
+    <p class="cloud-effect">Avec une organisation interne optimisée, le COG est adapté aux besoins des utilisateurs qui travaillent avec des données volumineuses et souhaitent un accès rapide aux informations pertinentes.</p>
+    <p class="cloud-effect">Informations sur le COG utilisé :</p>
+    <ul class="cloud-effect">
+        <li>Taille du fichier : 890 Mo (933 322 865 octets)</li>
+        <li>Province : Al Haouz</li>
+        <li>Origine : Image TIFF</li>
+        <li>Outil de conversion : GDAL-QGIS</li>
+    </ul>
+
+    <h2>Zarr</h2>
+    <p class="cloud-effect">Le format Zarr est utilisé pour stocker des ensembles de données multidimensionnels (comme des cubes de données climatiques ou environnementales). Il prend en charge la compression et est optimisé pour le traitement parallèle, ce qui le rend idéal pour l'analyse de grandes quantités de données dans des environnements distribués.</p>
+    <p class="cloud-effect">Grâce à sa structure hiérarchique et à ses capacités de compression, Zarr est particulièrement utile pour les scientifiques et les analystes travaillant sur des simulations à haute résolution ou des données d'observation massives.</p>
+    <p class="cloud-effect">Son intégration avec des bibliothèques de calcul parallèle et son support natif dans de nombreux outils de données font de Zarr un choix incontournable pour les applications de calcul intensif.</p>
+    <p class="cloud-effect">Informations sur le Zarr utilisé :</p>
+    <ul class="cloud-effect">
+        <li>Taille du fichier : 22 Mo </li>
+        <li>Zone : Maroc </li>
+        <li>Origine : 24 images TIFF</li>
+        <li>Outil de conversion : xarray </li>
+    </ul>
+    <h2>GeoParquet</h2>
+    <p class="cloud-effect">Le GeoParquet est un format basé sur Parquet, conçu pour stocker efficacement des données géométriques et tabulaires. Il est compatible avec de nombreux outils d'analyse de données et offre des performances élevées pour les requêtes SQL sur des ensembles de données géospatiales.</p>
+    <p class="cloud-effect">Son architecture orientée colonne permet un accès rapide et efficace aux données spécifiques, ce qui réduit le temps de traitement et améliore l'efficacité globale des flux de travail analytiques.</p>
+    <p class="cloud-effect">Le GeoParquet est particulièrement adapté pour les entreprises et organisations qui manipulent des volumes importants de données spatiales et souhaitent les intégrer dans des environnements de big data et d'analytique avancée.</p>
+    <p class="cloud-effect">Informations sur le GeoParquet utilisé :</p>
+    <ul class="cloud-effect">
+        <li>Taille du fichier : 22 Mo </li>
+        <li>Zone : Maroc </li>
+        <li>Origine : geojson </li>
+        <li>Outil de conversion : geopandas  </li>
+    </ul>
+</div>
+
+</body>
+</html>
